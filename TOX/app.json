@@ -2,7 +2,7 @@
   "expo": {
     "name": "TOX",
     "slug": "TOX",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "icon": "./assets/mainLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -45,11 +45,6 @@
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.aryanb.TOX"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "467764a2-4d68-4120-92a1-e926f852a1dc"
-      }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
