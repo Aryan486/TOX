@@ -467,6 +467,10 @@ export const ItemDetails = ({ route,navigation }) => {
                         <ButtonText>Close</ButtonText>
                     </Button>
                     <Button activeOpacity={0.65} style={{flex:0.5,justifyContent:"center"}} onPress={()=>{
+                        if(soldTo===undefined||soldTo===null||soldTo==""){
+                            alert("Select a buyer first")
+                            return
+                        }
                         Alert.alert(
                             "Has the item been bought?",
                             "Item will be removed from holding list",
