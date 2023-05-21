@@ -216,6 +216,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         token:token,
         securityOne:securityQuestionOne+" "+securityOne,
         securityTwo:securityQuestionTwo+" "+securityTwo,
+        createTs: new Date(),
       })
         .then(async (res) => {
           const docRef = doc(db, "users", res.id);

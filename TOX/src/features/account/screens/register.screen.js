@@ -43,6 +43,10 @@ export const RegisterScreen = ({ navigation }) => {
   const [mobileDisplay,setMobileDisplay]=useState(null)
   const { onRegister, isLoading, error, setError } = useContext(AuthenticationContext);
   const { orientation } = useContext(DeviceOrientationContext)
+  const [passwordInfoLen,setPasswordInfoLen]=useState(false)
+  const [passwordInfoSmall,setPasswordInfoSmall]=useState(false)
+  const [passwordInfoLarge,setPasswordInfoLarge]=useState(false)
+  const [passwordInfoNumeric,setPasswordInfoNumeric]=useState(false)
 
   const RegisterView = () => {
     return(
@@ -107,8 +111,24 @@ export const RegisterScreen = ({ navigation }) => {
                   textContentType="password"
                   secureTextEntry
                   autoCapitalize="none"
-                  onChangeText={(p) => setPassword(p)}
+                  onChangeText={(p) => {checkPassword(p)}}
                 />
+                {passwordInfoLen===true?
+                (<Text variant="error">Length 8</Text>
+                 ):(<></>)
+                }
+                {passwordInfoSmall===true?
+                (<Text variant="error">Must contain atleast one small case letter</Text>
+                 ):(<></>)
+                }
+                {passwordInfoLarge===true?
+                (<Text variant="error">Must contain atleast one upper case letter</Text>
+                 ):(<></>)
+                }
+                {passwordInfoNumeric===true?
+                (<Text variant="error">Must contain atleast one number</Text>
+                 ):(<></>)
+                }
               </Spacer>
               <SecurityDropdown setSecurityQuestion={setSecurityQuestionOne} securityQuestion={securityQuestionOne} security={securityOne} setSecurity={setSecurityOne} />
               <SecurityDropdown setSecurityQuestion={setSecurityQuestionTwo} securityQuestion={securityQuestionTwo} security={securityTwo} setSecurity={setSecurityTwo} />
@@ -135,6 +155,31 @@ export const RegisterScreen = ({ navigation }) => {
         </AccountContainer>
     )
   }
+
+    const checkPassword = (p) => {
+        setPassword(p)
+        const temp=p
+        if (temp.length < 8) {
+           setPasswordInfoLen(true)
+        } else{
+            setPasswordInfoLen(false)
+        }
+        if (temp.match(/[A-Z]/g) == null) {
+           setPasswordInfoLarge(true)
+        } else{
+            setPasswordInfoLarge(false)
+        }
+        if (temp.match(/[a-z]/g) == null ) {
+           setPasswordInfoSmall(true)
+        } else{
+            setPasswordInfoSmall(false)
+        }
+        if (temp.match(/[0-9]/g) == null) {
+           setPasswordInfoNumeric(true)
+        } else{
+            setPasswordInfoNumeric(false)
+        }
+    }
 
   const BackButtonView = () => {
     return (
